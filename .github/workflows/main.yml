@@ -16,6 +16,6 @@ jobs:
 
       - name: run cypress tests with firefox
         uses: cypress-io/thanhngotien1012@v2
-        timeout-minutes: 10
         with:
-          browser: firefox
+          build: npm run build
+          start: npm start
