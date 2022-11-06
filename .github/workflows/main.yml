@@ -1,21 +1,17 @@
-name: run my vanilla Cypress tests
-on: 
-  push:
-    branches:
-      - 'main'
-  workflow_dispatch:
+name: Cypress Tests
+
+on: [push]
 
 jobs:
-  checkout-and-test:
+  cypress-run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-
-      - name: Check out repository code
+      - name: Checkout
         uses: actions/checkout@v2
-
-      - name: run cypress tests with firefox
-        uses: cypress-io/thanhngotien1012@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v2 # use the explicit version number
         with:
           build: npm run build
           start: npm start
