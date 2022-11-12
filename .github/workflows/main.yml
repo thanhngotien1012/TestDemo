@@ -19,11 +19,11 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v2 # use the explicit version number
+        uses: cypress-io/github-action@v4.2.0 # use the explicit version number
         with:
-#           build: npm run build        
-#           start: npm start
-          install: true
-          command: pnpm --dir cypress/ cypress:ci
-          start: pnpm --dir myclient/ dev
+          build: npm run build        
+          start: npm start
+#           install: true
+#           command: pnpm --dir cypress/ cypress:ci
+#           start: pnpm --dir myclient/ dev
 
