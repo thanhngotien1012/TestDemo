@@ -1,25 +1,29 @@
-name: Cypress Tests with installation job
+name: Cypress Tests
 
 on: [push]
 
 jobs:
-  install:
+  cypress-run:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6
+          # Only install what we need to run the client in-action and tests against it
+          # format:    `--filter <packagename>...`
+          run_install: |
+           - args: [--filter myclient... --filter cypress-tests...]
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v2 # use the explicit version number
         with:
-          name: build
-          if-no-files-found: error
-          path: build
-
-      - name: Cypress install
-        uses: cypress-io/github-action@v4.x.x # use the explicit version number
-        with:
-          # Disable running of tests within install job
-          runTests: false
-          build: yarn build
+#           build: npm run build
+#           start: npm start
+          install: false
+          command: pnpm --dir cypress/ cypress:ci
+          start: pnpm --dir myclient/ dev
+          wait-on: 'https://localhost:8080'
