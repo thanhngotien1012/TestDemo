@@ -1,29 +1,12 @@
-name: Cypress Tests
-
+name: E2E on Chrome
 on: [push]
-
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    # let's make sure our tests pass on Chrome browser
+    name: E2E on Chrome
     steps:
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v2.0.1
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v4
         with:
-          version: 6
-          # Only install what we need to run the client in-action and tests against it
-          # format:    `--filter <packagename>...`
-          run_install: |
-           - args: [--filter myclient... --filter cypress-tests...]
-      - name: Checkout
-        uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v4.2.0 # use the explicit version number
-        with:
-          build: npm run build        
-          start: npm start
-#           install: true
-#           command: pnpm --dir cypress/ cypress:ci
-#           start: pnpm --dir myclient/ dev
-
+          browser: chrome
