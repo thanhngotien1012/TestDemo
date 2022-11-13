@@ -13,7 +13,10 @@ jobs:
 
       - name: Check out repository code
         uses: actions/checkout@v2
-
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Check formatting
+        run: yarn run format:check
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
