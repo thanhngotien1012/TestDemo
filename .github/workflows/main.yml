@@ -8,8 +8,8 @@ on:
 jobs:
   checkout-and-test:
 #     runs-on: ubuntu-latest
-      runs-on: ubuntu-latest
-        strategy:
+    runs-on: ubuntu-latest
+    strategy:
             matrix:
               node: [ 14, 16, 18 ]
     steps:
