@@ -7,11 +7,11 @@ on:
 
 jobs:
   checkout-and-test:
-#     runs-on: ubuntu-latest
     runs-on: ubuntu-latest
-    strategy:
-            matrix:
-              node: [ 14, 16, 18 ]
+#     runs-on: ubuntu-latest
+#     strategy:
+#             matrix:
+#               node: [ 14, 16, 18 ]
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
@@ -23,12 +23,12 @@ jobs:
           node-version: 15
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Cypress install
-        uses: cypress-io/github-action@v4
-        with:
-          node-version: ${{ matrix.node }}
+#       - name: Cypress install
+#         uses: cypress-io/github-action@v4
+#         with:
+#           node-version: ${{ matrix.node }}
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           build: npm run build
           start: npm start
