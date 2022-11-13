@@ -20,10 +20,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 15
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-        - name: Cypress install
+      - name: Cypress install
         uses: cypress-io/github-action@v4
         with:
           node-version: ${{ matrix.node }}
